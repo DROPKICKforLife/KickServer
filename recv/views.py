@@ -16,6 +16,7 @@ def index(request):
         # if not boto.config.get('s3', 'use-sigv4'):
         #     boto.config.add_section('s3')
         #     boto.config.set('s3', 'use-sigv4', 'True')
+        #
         #     pass
 
         config = configparser.ConfigParser()
@@ -23,9 +24,19 @@ def index(request):
         AccKey = config['AWSKeys']['AccessKey']
         PriKey = config['AWSKeys']['PrivateKey']
         Region = config['AWSKeys']['Region']
-        conn = boto.s3.connect_to_region(Region, aws_access_key_id=AccKey, aws_secret_access_key=PriKey)
+        print("connect start")
+        #conn = boto.connect_s3(AccKey,PriKey)
+
+        # conn = S3Connection(aws_access_key_id=AccKey,aws_secret_access_key=PriKey)
+        conn = boto.s3.connect_to_region(Region, aws_access_key_id=AccKey, aws_secret_access_key=PriKey,is_secure=False)
+
+        print("get bucket")
+        #bucketName = config['AWSKeys']['BucketName']
+        #bucket = conn.get_bucket(bucket_name=bucketName)
         bucket = conn.get_all_buckets()[0]
-        key = Key(bucket)
+        print(bucket)
+        # key = Key(bucket)
+        key = bucket.new_key(filename)
         key.key = filename
         key.set_contents_from_filename(filename)
         key.set_acl('public-read')
@@ -93,11 +104,11 @@ def index(request):
         # if postdata['userid'] and postdata['identify'] and postdata['imgdata']:
             filename = loadIMG(postdata)
             print(filename)
-            # url = uploadIMG(filename)
+            url = str(uploadIMG(filename)).split('?')[0]
             data = {
                 'result' : {
                     'message' : 'success',
-                    # 'imgurl' : url
+                    'imgurl' : url
                 }
             }
         else:
@@ -107,7 +118,7 @@ def index(request):
                 }
             }
             pass
-        uploadSQL(postdata['userid'],'http://url.url','http://tree.url')
+        uploadSQL(postdata['userid'],url,url)
         return HttpResponse(json.dumps(data))
     else:
         print("GET!")
