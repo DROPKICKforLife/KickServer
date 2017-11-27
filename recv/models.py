@@ -5,17 +5,10 @@ from django.db import models
 
 class UploadDatas(models.Model):
     userID = models.TextField('USERID',max_length=20)
-    treeURL = models.TextField('TREEURL',max_length=20)
+    treeURL = models.TextField('TREEURL',max_length=100)
     houseURL = models.TextField('HOUSEURL',max_length=100)
+    personURL = models.TextField('PERSONURL',max_length=100,null=True)
     lastEdit = models.DateTimeField('LASTEDIT',auto_now=True)
-    def getID(self):
-        return self.userID
-    def gettree(self):
-        return self.treeURL
-    def gethouse(self):
-        return self.houseURL
-    def getlast(self):
-        return self.lastEdit
 
     pass
 class UserAccounts(models.Model):

@@ -11,6 +11,9 @@ import configparser
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
 import boto
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+from django.conf import settings
 def index(request):
     def uploadIMG(filename):
         # if not boto.config.get('s3', 'use-sigv4'):
@@ -45,14 +48,19 @@ def index(request):
         print("임시파일 삭제완료")
         print("이미지데이터 30일 보관 설정중")
         return key.generate_url(3600 * 24 * 30)  # 30일 보관
-    def loadIMG(imgdata):
+    def loadIMG(imgdata,filedata):
         try:
             filename = imgdata['userid']+"_"+imgdata['identify']+'.png'
             print(filename)
-            splitData = str(imgdata['imgdata']).split(',')[1]
-            decodeData = base64.b64decode(splitData.encode('ascii'))
-            file = io.open(filename,mode='wb')
-            file.write(decodeData)
+            # path = default_storage.save(filename,ContentFile(filedata.read()))
+            # print("path 설정 완료")
+            # tmp_file = os.path.join(settings.MEDIA_ROOT, path)
+            file = io.open(filename, mode='wb')
+            file.write(filedata.read())
+            # splitData = str(filedata).split(',')[1]
+            # decodeData = base64.b64decode(splitData.encode('ascii'))
+            # file = io.open(filename,mode='wb')
+            # file.write(decodeData)
             file.close()
             print("이미지파일 생성완료")
         except(Exception):
@@ -82,12 +90,6 @@ def index(request):
                 houseURL = houseurl
             )
             query.save()
-            for i in UploadDatas.objects.all():
-                print(i.id)
-                print(i.userID)
-                print(i.treeURL)
-                print(i.houseURL)
-                print(i.lastEdit)
                 # print(i.id +" " +i.userID + " "+i.treeURL + " "+ i.houseURL +" "+ i.lastEdit)
         except:
             print("SQL ERROR")
@@ -99,26 +101,30 @@ def index(request):
     if request.method == "POST":
         print("POST recv")
         postdata = request.POST.dict()
-        print(postdata)
-        if 'identify' in postdata and 'userid' in postdata and 'imgdata' in postdata:
-        # if postdata['userid'] and postdata['identify'] and postdata['imgdata']:
-            filename = loadIMG(postdata)
+        filedata = request.FILES
+        for i in filedata:
+            filevalue = filedata[i]
+            break
+        print(filevalue)
+        if 'identify' in postdata.keys() and 'userid' in postdata.keys():
+            # if postdata['userid'] and postdata['identify'] and postdata['imgdata']:
+            filename = loadIMG(postdata,filevalue)
             print(filename)
             url = str(uploadIMG(filename)).split('?')[0]
             data = {
-                'result' : {
-                    'message' : 'success',
-                    'imgurl' : url
-                }
+                    'result' : {
+                        'message' : 'success',
+                        'imgurl' : url
+                    }
             }
+            uploadSQL(postdata['userid'],url,url)
         else:
             data = {
-                'result':{
-                    'message':'upload_error'
-                }
+                    'result':{
+                        'message':'upload_error'
+                    }
             }
             pass
-        uploadSQL(postdata['userid'],url,url)
         return HttpResponse(json.dumps(data))
     else:
         print("GET!")
