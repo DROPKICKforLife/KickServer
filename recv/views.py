@@ -223,8 +223,12 @@ def usercheck(request):
                     }
             except:
                 result={
-                    'result' :'err'
+                    'result' :'null'
                 }
+        else:
+            result={
+                'result':'err'
+            }
 
     return HttpResponse(json.dumps(result))
 
