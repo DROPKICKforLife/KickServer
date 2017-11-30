@@ -201,14 +201,32 @@ def usercheck(request):
             token = postdata['usertoken']
             try:
                 if token in UserAccounts.objects.all().usertoken:
-                    result = "exist"
+                    result = {
+                        'result':'exist'
+                    }
             except:
-                result = "null"
+                result = {
+                    'result':'null'
+                }
         else:
-            result = "ERR"
+            result = {
+                'result':'err'
+            }
     else:
-        result = "Do Not GET.."
-    return HttpResponse(result)
+        getdata = request.GET.dict()
+        if 'usertoken' in getdata:
+            token = getdata['usertoken']
+            try:
+                if token in UserAccounts.objects.all().usertoken:
+                    result={
+                        'result':'exist'
+                    }
+            except:
+                result={
+                    'result' :'err'
+                }
+
+    return HttpResponse(json.dumps(result))
 
 def viewdoctor(request):
     if request.method == "GET":
