@@ -3,7 +3,7 @@ from django.db import models
 
 class UserAccounts(models.Model):
     userid = models.AutoField('userid',primary_key=True)
-    usertoken = models.BigIntegerField('usertoken',null=True)
+    usertoken = models.BigIntegerField('usertoken',null=False)
     childname = models.TextField('childname',max_length=50)
     childsex = models.SmallIntegerField('childsex')
     childbirth = models.DateTimeField('childbirth')

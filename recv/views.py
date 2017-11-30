@@ -142,10 +142,11 @@ def upload(request):
         return redirect(url)
         # return HttpResponse(url)
 
-def addUserAcount(childname,childsex,childbirth,childability,prevcontent,hopecontent:None):
+def addUserAcount(usertoken,childname,childsex,childbirth,childability,prevcontent,hopecontent:None):
     time = datetime.datetime.fromtimestamp(float(childbirth))
     if hopecontent != None:
         query = UserAccounts.objects.create(
+            usertoken = usertoken,
             childname = childname,
             childsex = int(childsex),
             childbirth = time,
@@ -155,6 +156,7 @@ def addUserAcount(childname,childsex,childbirth,childability,prevcontent,hopecon
         )
     else:
         query = UserAccounts.objects.create(
+            usertoken = usertoken,
             childname=childname,
             childsex=int(childsex),
             childbirth=time,
@@ -169,7 +171,11 @@ def addUserAcount(childname,childsex,childbirth,childability,prevcontent,hopecon
 def useradd(request): # 유저등록
     if request.method == "POST":
         postdata = request.POST.dict()
-        if 'childname' in postdata and 'childsex' in postdata and 'childbirth' in postdata and 'childability' in postdata and 'prevcontent' in postdata:
+        if ('usertoken' not in postdata):
+            result = {
+                "result": "invalid token.."
+            }
+        elif 'childname' in postdata and 'childsex' in postdata and 'childbirth' in postdata and 'childability' in postdata and 'prevcontent' in postdata:
 
             if 'hopecontent' in postdata:
                 addUserAcount(childname=postdata['childname'],childsex=postdata['childsex'],childbirth = postdata['childbirth'],childability=postdata['childability'],prevcontent=postdata['prevcontent'],hopecontent=postdata['hopecontent'])
