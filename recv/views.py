@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import UserAccounts
 from .models import UploadDatas
 from .models import DoctorAccounts
+from .models import Weeks
 import base64
 import json
 import io
@@ -11,46 +12,50 @@ import configparser
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
 import boto
+import datetime
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.conf import settings
+
+
+def uploadIMG(filename):
+    # if not boto.config.get('s3', 'use-sigv4'):
+    #     boto.config.add_section('s3')
+    #     boto.config.set('s3', 'use-sigv4', 'True')
+    #
+    #     pass
+
+    config = configparser.ConfigParser()
+    config.read('conf.ini')
+    AccKey = config['AWSKeys']['AccessKey']
+    PriKey = config['AWSKeys']['PrivateKey']
+    Region = config['AWSKeys']['Region']
+    print("connect start")
+    # conn = boto.connect_s3(AccKey,PriKey)
+
+    # conn = S3Connection(aws_access_key_id=AccKey,aws_secret_access_key=PriKey)
+    conn = boto.s3.connect_to_region(Region, aws_access_key_id=AccKey, aws_secret_access_key=PriKey, is_secure=False)
+
+    print("get bucket")
+    # bucketName = config['AWSKeys']['BucketName']
+    # bucket = conn.get_bucket(bucket_name=bucketName)
+    bucket = conn.get_all_buckets()[0]
+    print(bucket)
+    # key = Key(bucket)
+    key = bucket.new_key(filename)
+    key.key = filename
+    key.set_contents_from_filename(filename)
+    key.set_acl('public-read')
+    print("업로드 완료")
+    os.remove(filename)
+    print("임시파일 삭제완료")
+    print("이미지데이터 30일 보관 설정중")
+    return key.generate_url(3600 * 24 * 30)  # 30일 보관
 def index(request):
-    def uploadIMG(filename):
-        # if not boto.config.get('s3', 'use-sigv4'):
-        #     boto.config.add_section('s3')
-        #     boto.config.set('s3', 'use-sigv4', 'True')
-        #
-        #     pass
 
-        config = configparser.ConfigParser()
-        config.read('conf.ini')
-        AccKey = config['AWSKeys']['AccessKey']
-        PriKey = config['AWSKeys']['PrivateKey']
-        Region = config['AWSKeys']['Region']
-        print("connect start")
-        #conn = boto.connect_s3(AccKey,PriKey)
-
-        # conn = S3Connection(aws_access_key_id=AccKey,aws_secret_access_key=PriKey)
-        conn = boto.s3.connect_to_region(Region, aws_access_key_id=AccKey, aws_secret_access_key=PriKey,is_secure=False)
-
-        print("get bucket")
-        #bucketName = config['AWSKeys']['BucketName']
-        #bucket = conn.get_bucket(bucket_name=bucketName)
-        bucket = conn.get_all_buckets()[0]
-        print(bucket)
-        # key = Key(bucket)
-        key = bucket.new_key(filename)
-        key.key = filename
-        key.set_contents_from_filename(filename)
-        key.set_acl('public-read')
-        print("업로드 완료")
-        os.remove(filename)
-        print("임시파일 삭제완료")
-        print("이미지데이터 30일 보관 설정중")
-        return key.generate_url(3600 * 24 * 30)  # 30일 보관
     def loadIMG(imgdata,filedata):
         try:
-            filename = imgdata['userid']+"_"+imgdata['identify']+'.png'
+            filename = imgdata['userid']+"_"+imgdata['identify']+str(datetime.datetime.now().timestamp())+'.png'
             print(filename)
             # path = default_storage.save(filename,ContentFile(filedata.read()))
             # print("path 설정 완료")
@@ -68,26 +73,12 @@ def index(request):
             return "ERR"
         finally:
             return filename
-    def addUserAcount(userid,userpw,phone,sex):
-        query = UserAccounts.objects.create(
-            userID=userid,
-            userPW=userpw,
-            phone=phone,
-            sex=sex
-        )
-        query.save()
-        for i in UserAccounts.objects.all():
-            print(i.id)
-            print(i.userID)
-            print(i.phone)
-            pass
-        pass
-    def uploadSQL(userid,treeurl,houseurl):
+
+    def uploadSQL(userid,dataurl):
         try:
             query = UploadDatas.objects.create(
                 userID=userid,
-                treeURL = treeurl,
-                houseURL = houseurl
+                dataurl = dataurl
             )
             query.save()
                 # print(i.id +" " +i.userID + " "+i.treeURL + " "+ i.houseURL +" "+ i.lastEdit)
@@ -131,3 +122,128 @@ def index(request):
 
         return HttpResponse("HI")
     pass
+from django.shortcuts import redirect
+def upload(request):
+    if request.method == "POST":
+        postdata = request.POST.dict()
+        userid = postdata['userid']
+        imgdata = postdata['file']
+        if postdata['root'] == 'root':
+            filename = 'root_'+str(datetime.datetime.now().timestamp())+'.png'
+        elif postdata['root'] == 'noroot':
+            filename = 'noroot_'+str(datetime.datetime.now().timestamp())+'.png'
+        file = io.open(filename, mode='wb')
+
+        splitData = str(imgdata).split(',')[1]
+        decodeData = base64.b64decode(splitData.encode('ascii'))
+        file.write(decodeData)
+        file.close()
+        url = uploadIMG(filename).split('?')[0]
+        return redirect(url)
+        # return HttpResponse(url)
+
+def addUserAcount(childname,childsex,childbirth,childability,prevcontent,hopecontent:None):
+    time = datetime.datetime.fromtimestamp(float(childbirth))
+    if hopecontent != None:
+        query = UserAccounts.objects.create(
+            childname = childname,
+            childsex = int(childsex),
+            childbirth = time,
+            childability = int(childability),
+            prevcontent = prevcontent,
+            hopecontent = hopecontent
+        )
+    else:
+        query = UserAccounts.objects.create(
+            childname=childname,
+            childsex=int(childsex),
+            childbirth=time,
+            childability=int(childability),
+            prevcontent=prevcontent
+        )
+    query.save()
+    for i in UserAccounts.objects.all():
+        print(i.userid)
+        pass
+    pass
+def useradd(request): # 유저등록
+    if request.method == "POST":
+        postdata = request.POST.dict()
+        if 'childname' in postdata and 'childsex' in postdata and 'childbirth' in postdata and 'childability' in postdata and 'prevcontent' in postdata:
+
+            if 'hopecontent' in postdata:
+                addUserAcount(childname=postdata['childname'],childsex=postdata['childsex'],childbirth = postdata['childbirth'],childability=postdata['childability'],prevcontent=postdata['prevcontent'],hopecontent=postdata['hopecontent'])
+            else:
+                addUserAcount(childname=postdata['childname'],childsex= postdata['childsex'],childbirth = postdata['childbirth'],childability= postdata['childability'],prevcontent = postdata['prevcontent'],hopecontent=None)
+            result = {
+                "result":"success"
+            }
+        else:
+            result = {
+                "result": "ERR"
+            }
+    else:
+        result = {
+            "result":"Do not INPUT GET"
+        }
+        print(datetime.datetime.now().timestamp())
+    return HttpResponse(json.dumps(result))
+def usercheck(request):
+    if request.method == "POST":
+        postdata = request.POST.dict()
+        if 'usertoken' in postdata:
+            token = postdata['usertoken']
+            try:
+                if token in UserAccounts.objects.all().usertoken:
+                    result = "exist"
+            except:
+                result = "null"
+        else:
+            result = "ERR"
+    else:
+        result = "Do Not GET.."
+    return HttpResponse(result)
+
+def viewdoctor(request):
+    if request.method == "GET":
+        getdata = request.GET.dict()
+        if 'doctorid' in getdata:
+            docid = getdata['doctorid']
+            result = {
+                'result': 'out of index'
+            }
+            for i in DoctorAccounts.objects.all():
+                if docid == i.doctorid:
+                    result = {
+                        'doctorcount' : i.doctorcount,
+                        'doctorname' : i.doctorname,
+                        'hospitalname' : i.hospitalname,
+                        'profileimgurl' : i.profileimgurl,
+                        'speclist' : i.speclist,
+                        'schoolname' : i.schoolname
+                    }
+                    break
+                    pass
+            return json.dumps(result)
+        return "please parameter 'doctorid'"
+    return "please GET data"
+
+def viewweek(request):
+    if request.method == "GET":
+        getdata = request.GET.dict()
+        if 'weekid' in getdata:
+            weekid = getdata['weekid']
+            result = {
+                'result' : 'out of index'
+            }
+            for i in Weeks.objects.all():
+                if weekid == i.weekid:
+                    result = {
+                        'weekcontents' : i.weekcontents
+
+                    }
+                    break
+                    pass
+            return json.dumps(result)
+        return "Please parameter 'weekid'"
+    return "please GET data"

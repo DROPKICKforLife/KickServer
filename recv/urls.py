@@ -19,7 +19,10 @@ from . import views
 urlpatterns = [
 
     path('',views.index, name='index'),
-
+    path('upload',views.upload, name='upload'),
+    path('useradd',views.useradd,name='useradd'),
+    path('usercheck',views.usercheck,name='usercheck'),
+    path('viewdoctor',views.viewdoctor,name='viewdoctor'),
 
 
 ]
