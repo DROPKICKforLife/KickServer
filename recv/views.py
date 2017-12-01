@@ -273,14 +273,4 @@ def viewweek(request):
     return "please GET data"
 
 
-def testing(request):
-    DoctorAccounts.objects.create(
-        doctorcount = 2,
-        speclist = ["서울대학교 의과대학 졸업","(전)서울대학교 병원 상담치료 전문의"],
-        hospitalname ="서울순천향대학병원",
-        doctorname = "김치료",
-        profileimgurl =  "http://www.clipartmasters.com/clip-arts/1666/pikachu-clipart-1666974.jpg",
-        schoolname = "서울대학교"
-    ).save()
-    return HttpResponse("success")
 # -*-coding:utf-8-*-

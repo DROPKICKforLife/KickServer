@@ -24,6 +24,5 @@ urlpatterns = [
     path('usercheck',views.usercheck,name='usercheck'),
     path('viewdoctor',views.viewdoctor,name='viewdoctor'),
     path('viewweek',views.viewweek,name='viewweek'),
-    path('testing',views.testing,name='testing'),
 
 ]
