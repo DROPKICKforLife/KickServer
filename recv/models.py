@@ -26,6 +26,7 @@ class UploadDatas(models.Model):
 
     pass
 class DoctorAccounts(models.Model):
+    doctortoken = models.BigIntegerField('doctortoken',null=True)
     doctorid = models.AutoField('doctorid',primary_key=True)
     doctorcount = models.IntegerField('doctorcount')
     doctorname = models.TextField('doctorname',max_length=50)

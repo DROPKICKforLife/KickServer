@@ -273,5 +273,9 @@ def viewweek(request):
     return HttpResponse("please GET data")
 def page(request):
     return render(request,'index.html')
+def drlogin(request):
+    url = "/oauth/authorize?client_id={app_key}&redirect_uri={redirect_uri}&response_type=code"
+    
 
+    return HttpResponse("success")
 # -*-coding:utf-8-*-

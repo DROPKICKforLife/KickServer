@@ -29,5 +29,6 @@ urlpatterns = [
     path('viewdoctor',views.viewdoctor,name='viewdoctor'),
     path('viewweek',views.viewweek,name='viewweek'),
     path('page',views.page,name='page'),
+    path('drlogin',views.page.drlogin, name='drlogin'),
 
 ] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
