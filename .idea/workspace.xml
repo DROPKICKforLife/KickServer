@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59b9d1cf-d870-4fc4-b162-80cbfb50db9c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KickServer/settings.py" afterPath="$PROJECT_DIR$/KickServer/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/recv/views.py" afterPath="$PROJECT_DIR$/recv/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +19,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/recv/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="265" column="51" lean-forward="false" selection-start-line="265" selection-start-column="51" selection-end-line="265" selection-end-column="51" />
+            <state relative-caret-position="560">
+              <caret line="284" column="34" lean-forward="false" selection-start-line="284" selection-start-column="34" selection-end-line="284" selection-end-column="34" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -492,8 +491,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/recv/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="265" column="51" lean-forward="false" selection-start-line="265" selection-start-column="51" selection-end-line="265" selection-end-column="51" />
+        <state relative-caret-position="560">
+          <caret line="284" column="34" lean-forward="false" selection-start-line="284" selection-start-column="34" selection-end-line="284" selection-end-column="34" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
