@@ -248,9 +248,9 @@ def viewdoctor(request):
             returndata = {
                    'result': result
             }
-            return json.dumps(returndata)
-        
-    return "please GET data"
+            return HttpResponse(json.dumps(returndata))
+
+    return  HttpResponse("please GET data")
 
 def viewweek(request):
     if request.method == "GET":
