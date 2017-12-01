@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
+import os
+SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 urlpatterns = [
 
     path('',views.index, name='index'),
@@ -26,4 +30,4 @@ urlpatterns = [
     path('viewweek',views.viewweek,name='viewweek'),
     path('page',views.page,name='page'),
 
-]
+] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
