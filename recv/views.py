@@ -271,3 +271,4 @@ def viewweek(request):
             return json.dumps(result)
         return "Please parameter 'weekid'"
     return "please GET data"
+# -*-coding:utf-8-*-
