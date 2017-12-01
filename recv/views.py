@@ -271,7 +271,7 @@ def viewweek(request):
             return HttpResponse(json.dumps(result))
         return HttpResponse("Please parameter 'weekid'")
     return HttpResponse("please GET data")
-def index(request):
+def page(request):
     return render(request,'index.html')
 
 # -*-coding:utf-8-*-
