@@ -234,14 +234,8 @@ def usercheck(request):
 
 def viewdoctor(request):
     if request.method == "GET":
-        getdata = request.GET.dict()
-        if 'doctorid' in getdata:
-            docid = getdata['doctorid']
-            result = {
-                'result': 'out of index'
-            }
+            result = []
             for i in DoctorAccounts.objects.all():
-                result = []
                 result.append({
                        'doctorcount' : i.doctorcount,
                        'doctorname' : i.doctorname,
@@ -255,7 +249,7 @@ def viewdoctor(request):
                    'result': result
             }
             return json.dumps(returndata)
-        return "please parameter 'doctorid'"
+        
     return "please GET data"
 
 def viewweek(request):
