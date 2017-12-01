@@ -268,9 +268,9 @@ def viewweek(request):
                     }
                     break
                     pass
-            return json.dumps(result)
-        return "Please parameter 'weekid'"
-    return "please GET data"
+            return HttpResponse(json.dumps(result))
+        return HttpResponse("Please parameter 'weekid'")
+    return HttpResponse("please GET data")
 
 
 # -*-coding:utf-8-*-
