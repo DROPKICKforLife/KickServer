@@ -241,18 +241,20 @@ def viewdoctor(request):
                 'result': 'out of index'
             }
             for i in DoctorAccounts.objects.all():
-                if docid == i.doctorid:
-                    result = {
-                        'doctorcount' : i.doctorcount,
-                        'doctorname' : i.doctorname,
-                        'hospitalname' : i.hospitalname,
-                        'profileimgurl' : i.profileimgurl,
-                        'speclist' : i.speclist,
-                        'schoolname' : i.schoolname
-                    }
-                    break
-                    pass
-            return json.dumps(result)
+                result = []
+                result.append({
+                       'doctorcount' : i.doctorcount,
+                       'doctorname' : i.doctorname,
+                       'hospitalname' : i.hospitalname,
+                       'profileimgurl' : i.profileimgurl,
+                       'speclist' : i.speclist,
+                       'schoolname' : i.schoolname
+                       })
+
+            returndata = {
+                   'result': result
+            }
+            return json.dumps(returndata)
         return "please parameter 'doctorid'"
     return "please GET data"
 
