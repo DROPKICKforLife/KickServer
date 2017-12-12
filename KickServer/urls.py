@@ -15,8 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from recv.views import getdrcode
+from recv.views import loginpage
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
+LOGIN_REDIRECT_URL='/'
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('recv/',include('recv.urls'))
+    path('recv/',include('recv.urls')),
+    path('oauth', getdrcode),
+    path('',loginpage),
 ]

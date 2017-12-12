@@ -1,4 +1,12 @@
 *.png
+*.txt
 *.ini
 *.log
 *.pem
+*.meta
+recv/house_models/chimney_smoke_none_model/*
+recv/house_models/house_door_model/*
+recv/tree_models/tree_leaf_model/*
+recv/tree_models/tree_roots_model/*
+recv/tree_models/tree_stem_model/*
+recv/*.txt

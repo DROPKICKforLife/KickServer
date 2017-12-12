@@ -87,7 +87,12 @@ DATABASES = {
     }
 }
 
-
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2', # Google
+    'social_core.backends.facebook.FacebookOAuth2', # Facebook
+    'social_core.backends.kakao.KakaoOAuth2',
+    'django.contrib.auth.backends.ModelBackend', # Django 기본 유저모델
+]
 # Password validation
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
 
@@ -127,4 +132,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = '/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+SOCIAL_AUTH_KAKAO_OAUTH2_Native = config['Kakao']['Native']
+SOCIAL_AUTH_KAKAO_OAUTH2_REST = config['Kakao']['REST']
+
 # -*-coding:utf-8-*-

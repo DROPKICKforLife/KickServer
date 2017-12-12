@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Dr.Mom - 우리아이 그림검사 프로젝트 </title>
+  <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+  <link rel="apple-touch-icon" href="/recv/static/assets/images/logo.png">
+  <meta name="apple-mobile-web-app-title" content="Flatkit">
+  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" sizes="196x196" href="/recv/static/assets/images/logo.png">
+
+  <!-- style -->
+  <link rel="stylesheet" href="/recv/static/assets/animate.css/animate.min.css" type="text/css" />
+  <link rel="stylesheet" href="/recv/static/assets/glyphicons/glyphicons.css" type="text/css" />
+  <link rel="stylesheet" href="/recv/static/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="/recv/static/assets/material-design-icons/material-design-icons.css" type="text/css" />
+
+  <link rel="stylesheet" href="/recv/static/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+  <!-- build:css /recv/static/assets/styles/app.min.css -->
+  <link rel="stylesheet" href="/recv/static/assets/styles/app.css" type="text/css" />
+  <!-- endbuild -->
+  <link rel="stylesheet" href="/recv/static/assets/styles/font.css" type="text/css" />
+</head>
+<body>
+  <div class="app" id="app">
+
+<!-- ############ LAYOUT START-->
+
+  <!-- aside -->
+  <div id="aside" class="app-aside modal nav-dropdown">
+  	<!-- fluid app aside -->
+    <div class="left navside dark dk" data-layout="column">
+  	  <div class="navbar no-radius">
+        <!-- brand -->
+        <a class="navbar-brand" href="login">
+        	<div ui-include="'/recv/static/assets/images/logo.svg'"></div>
+        	<img src="/recv/static/assets/images/logo.png" alt="." class="hide">
+        	<span class="hidden-folded inline">Dr.Mom</span>
+        </a>
+        <!-- / brand -->
+      </div>
+      <div class="hide-scroll" data-flex>
+          <nav class="scroll nav-light">
+
+              <ul class="nav" ui-nav>
+                <li class="nav-header hidden-folded">
+                  <small class="text-muted">주 기능</small>
+                </li>
+
+                <li>
+                  <a  href="login" >
+                    <span class="nav-icon">
+                      <i class="material-icons">&#xe3fc;
+                        <span ui-include="'/recv/static/assets/images/i_0.svg'"></span>
+                      </i>
+                    </span>
+                    <span class="nav-text">메인페이지</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a>
+                    <span class="nav-caret">
+                      <i class="fa fa-caret-down"></i>
+                    </span>
+                    <span class="nav-label">
+                      <b class="label rounded label-sm primary">5</b>
+                    </span>
+                    <span class="nav-icon">
+                      <i class="material-icons">&#xe5c3;
+                        <span ui-include="'/recv/static/assets/images/i_1.svg'"></span>
+                      </i>
+                    </span>
+                    <span class="nav-text">환자 목록</span>
+                  </a>
+                  <ul class="nav-sub">
+                      {% for i in useracc %}
+                    <li>
+                      <a href="/recv/childpage?id={{ i.userid }}" >
+                        <span class="nav-text">{{ i.childname }}</span>
+                      </a>
+                    </li>
+                      {% endfor %}
+                  </ul>
+                </li>
+
+                <li class="nav-header hidden-folded">
+                  <small class="text-muted">마이 페이지</small>
+                </li>
+
+                <li>
+
+                  <a href="/recv/profile">
+                    <span class="nav-caret">
+                      <!-- <i class="fa fa-caret-down"></i> -->
+                    </span>
+                    <span class="nav-label">
+                      <!-- <b class="label label-sm accent">8</b> -->
+                    </span>
+                    <span class="nav-icon">
+                      <i class="material-icons">&#xe429;
+                        <span ui-include="'/recv/static/assets/images/i_4.svg'"></span>
+                      </i>
+                    </span>
+                    <span class="nav-text">계정 정보 관리</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a>
+                    <span class="nav-caret">
+                      <!-- <i class="fa fa-caret-down"></i> -->
+                    </span>
+                    <!-- <span class="nav-label"><b class="label no-bg">9</b></span> -->
+                    <span class="nav-icon">
+                      <i class="material-icons">&#xe3e8;
+                        <span ui-include="'/recv/static/assets/images/i_5.svg'"></span>
+                      </i>
+                    </span>
+                    <span class="nav-text">금액 관리</span>
+                  </a>
+
+                </li>
+
+                <li>
+                  <a href="/recv/logout">
+                    <span class="nav-caret">
+                      <!-- <i class="fa fa-caret-down"></i> -->
+                    </span>
+                    <span class="nav-icon">
+                      <i class="material-icons">&#xe39e;
+                        <span ui-include="'/recv/static/assets/images/i_6.svg'"></span>
+                      </i>
+                    </span>
+                    <span class="nav-text">로그아웃</span>
+                  </a>
+
+                </li>
+
+                <li class="nav-header hidden-folded">
+                  <small class="text-muted">고객센터</small>
+                </li>
+
+                <li class="hidden-folded" >
+                  <a href="/recv/hint" >
+                    <span class="nav-text">도움말</span>
+                  </a>
+                </li>
+
+              </ul>
+          </nav>
+      </div>
+      <div class="b-t">
+        <div class="nav-fold">
+        	<a href="/">
+        	    <span class="pull-left">
+        	      <img src="/recv/static/assets/images/a0.jpg" alt="..." class="w-40 img-circle">
+        	    </span>
+        	    <span class="clear hidden-folded p-x">
+        	      <span class="block _500">Jean Reyes</span>
+        	      <small class="block text-muted"><i class="fa fa-circle text-success m-r-sm"></i>online</small>
+        	    </span>
+        	</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / -->
+  
+  <!-- content -->
+  <div id="content" class="app-content box-shadow-z0" role="main">
+    <div class="app-header white box-shadow">
+        <div class="navbar navbar-toggleable-sm flex-row align-items-center">
+            <!-- Open side - Naviation on mobile -->
+            <a data-toggle="modal" data-target="#aside" class="hidden-lg-up mr-3">
+              <i class="material-icons">&#xe5d2;</i>
+            </a>
+            <!-- / -->
+        
+            <!-- Page title - Bind to $state's title -->
+            <div class="mb-0 h5 no-wrap" ng-bind="$state.current.data.title" id="pageTitle"></div>
+        
+            <!-- navbar collapse -->
+            <div class="collapse navbar-collapse" id="collapse">
+              <!-- link and dropdown -->
+              <ul class="nav navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                  <a class="nav-link" href data-toggle="dropdown">
+                    <i class="fa fa-fw fa-plus text-muted"></i>
+                    <span>New</span>
+                  </a>
+                  <div ui-include="'/recv/static/views/blocks/dropdown.new.html'"></div>
+                </li>
+              </ul>
+        
+              <div ui-include="'/recv/static/views/blocks/navbar.form.html'"></div>
+              <!-- / -->
+            </div>
+            <!-- / navbar collapse -->
+        
+            <!-- navbar right -->
+            <ul class="nav navbar-nav ml-auto flex-row">
+              <li class="nav-item dropdown pos-stc-xs">
+                <a class="nav-link mr-2" href data-toggle="dropdown">
+                  <i class="material-icons">&#xe7f5;</i>
+                  <span class="label label-sm up warn">3</span>
+                </a>
+                <div ui-include="'/recv/static/views/blocks/dropdown.notification.html'"></div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link p-0 clear" href="#" data-toggle="dropdown">
+                  <span class="avatar w-32">
+                    <img src="/recv/static/assets/images/a0.jpg" alt="...">
+                    <i class="on b-white bottom"></i>
+                  </span>
+                </a>
+                <div ui-include="'/recv/static/views/blocks/dropdown.user.html'"></div>
+              </li>
+              <li class="nav-item hidden-md-up">
+                <a class="nav-link pl-2" data-toggle="collapse" data-target="#collapse">
+                  <i class="material-icons">&#xe5d4;</i>
+                </a>
+              </li>
+            </ul>
+            <!-- / navbar right -->
+        </div>
+    </div>
+    <div class="app-footer">
+      <div class="p-2 text-xs">
+         <div class="pull-right text-muted py-1">
+          &copy; Copyright <strong>SW Maestro 8th </strong> <span class="hidden-xs-down">- TEAM1004</span>
+          <a ui-scroll-to="content"><i class="fa fa-long-arrow-up p-x-sm"></i></a>
+        </div>
+          <div class="nav">
+           </div>
+      </div>
+    </div>
+    <div ui-view class="app-body" id="view">
+
+<!-- ############ PAGE START-->
+
+<div class="padding">
+	<h5 class="_300 margin">포인트 관리</h5>
+	<div class="row">
+		<div class="col-sm-6">
+        <div class="box">
+          <div class="box-header">
+            <h3>현재 소유하고 계신 포인트 입니다</h3>
+            <small class="block text-muted">이 포인트는 현금과 1:1 비율로 환전 가능합니다</small>
+          </div>
+          <div class="box-body">
+            <h1>10000원</h1>
+          </div>
+            <form method="post" action="#">
+                <input type="hidden" name="money" value="10000">
+                <button type="submit" onclick="alert('환전 기능은 준비중인 기능입니다!')" class="btn btn-outline rounded b-primary text-primary" >환전합니다</button>
+            </form>
+        </div>
+      </div>
+	</div>
+{#	<div class="row">#}
+{#		<div class="col-md-6 col-lg-3">#}
+{#			<div class="navside white r box-shadow-z0 m-b nav-center" layout="column" style="height: 680px">#}
+{#				<div ui-include="'/recv/static/views/blocks/aside.0.html'"></div>#}
+{#			</div>#}
+{#		</div>#}
+{#		<div class="col-md-6 col-lg-3 hidden-md-down">#}
+{#			<div class="row">#}
+{#				<div class="col-sm-6">#}
+{#					<div class="navside white r box-shadow-z0 m-b hover-top folded nav-expand show-text w-xs" layout="column" style="height: 680px">#}
+{#						<div ui-include="'/recv/static/views/blocks/aside.0.html'"></div>#}
+{#					</div>#}
+{#				</div>#}
+{#				<div class="col-sm-6">#}
+{#					<div class="navside white r box-shadow-z0 m-b hover-top folded nav-dropdown show-text w-xs" layout="column" style="height: 680px">#}
+{#						<div ui-include="'/recv/static/views/blocks/aside.2.html'"></div>#}
+{#					</div>#}
+{#				</div>#}
+{#			</div>#}
+{#		</div>#}
+{#		<div class="col-md-6 col-lg-3 hidden-md-down">#}
+{#			<div class="row">#}
+{#				<div class="col-sm-4">#}
+{#					<div class="navside white r box-shadow-z0 m-b hover-top folded nav-expand" layout="column" style="height: 680px">#}
+{#						<div ui-include="'/recv/static/views/blocks/aside.0.html'"></div>#}
+{#					</div>#}
+{#				</div>#}
+{#				<div class="col-sm-4">#}
+{#					<div class="navside white r box-shadow-z0 m-b hover-top folded nav-dropdown" layout="column" style="height: 680px">#}
+{#						<div ui-include="'/recv/static/views/blocks/aside.1.html'"></div>#}
+{#					</div>#}
+{#				</div>#}
+{#				<div class="col-sm-4">#}
+{#					<div class="navside white r box-shadow-z0 m-b hover-top folded nav-dropdown" layout="column" style="height: 680px">#}
+{#						<div ui-include="'/recv/static/views/blocks/aside.2.html'"></div>#}
+{#					</div>#}
+{#				</div>#}
+{#			</div>#}
+{#		</div>#}
+{#		<div class="col-md-6 col-lg-3">#}
+{#			<div class="white r box-shadow-z0 b">#}
+{#  				<div ui-include="'/recv/static/views/blocks/widget.apps.html'"></div>#}
+{#			</div>#}
+{#		</div>#}
+{#	</div>#}
+</div>
+
+<!-- ############ PAGE END-->
+
+    </div>
+  </div>
+  <!-- / -->
+
+  <!-- theme switcher -->
+
+  <!-- / -->
+
+<!-- ############ LAYOUT END-->
+
+  </div>
+<!-- build:js /recv/static/scripts/app.html.js -->
+<!-- jQuery -->
+  <script src="/recv/static/libs/jquery/jquery/dist/jquery.js"></script>
+<!-- Bootstrap -->
+  <script src="/recv/static/libs/jquery/tether/dist/js/tether.min.js"></script>
+  <script src="/recv/static/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+<!-- core -->
+  <script src="/recv/static/libs/jquery/underscore/underscore-min.js"></script>
+  <script src="/recv/static/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+  <script src="/recv/static/libs/jquery/PACE/pace.min.js"></script>
+
+  <script src="/recv/static/scripts/config.lazyload.js"></script>
+
+  <script src="/recv/static/scripts/palette.js"></script>
+  <script src="/recv/static/scripts/ui-load.js"></script>
+  <script src="/recv/static/scripts/ui-jp.js"></script>
+  <script src="/recv/static/scripts/ui-include.js"></script>
+  <script src="/recv/static/scripts/ui-device.js"></script>
+  <script src="/recv/static/scripts/ui-form.js"></script>
+  <script src="/recv/static/scripts/ui-nav.js"></script>
+  <script src="/recv/static/scripts/ui-screenfull.js"></script>
+  <script src="/recv/static/scripts/ui-scroll-to.js"></script>
+  <script src="/recv/static/scripts/ui-toggle-class.js"></script>
+
+  <script src="/recv/static/scripts/app.js"></script>
+
+  <!-- ajax -->
+  <script src="/recv/static/libs/jquery/jquery-pjax/jquery.pjax.js"></script>
+  <script src="/recv/static/scripts/ajax.js"></script>
+<!-- endbuild -->
+</body>
+</html>

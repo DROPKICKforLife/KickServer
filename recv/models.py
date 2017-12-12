@@ -10,6 +10,9 @@ class UserAccounts(models.Model):
     childability = models.SmallIntegerField('childability')
     prevcontent = models.TextField('prevcontent',max_length=200,null=True)
     hopecontent = models.TextField('hopecontent',max_length=200,null=True)
+    createdate = models.DateTimeField('createdate',auto_now=True)
+    week = models.IntegerField('week',default=1)
+    doctorid = models.IntegerField('doctorid',null=True)
     # userID = models.TextField('USERID',max_length=20)
     # userPW = models.TextField('USERPW',max_length=20)
     # phone = models.TextField('PHONE',max_length=11)
@@ -17,36 +20,73 @@ class UserAccounts(models.Model):
     pass
 
 class UploadDatas(models.Model):
-    userid = UserAccounts.userid
+    userid = models.IntegerField('userid',null=False)
     dataurl = models.TextField('dataurl',max_length=200)
     uploadtime = models.DateTimeField('uploadtime',auto_now=True)
-    # treeURL = models.TextField('TREEURL',max_length=100)
-    # houseURL = models.TextField('HOUSEURL',max_length=100)
-    # personURL = models.TextField('PERSONURL',max_length=100,null=True)
+    content = models.TextField('content',max_length=1000, null=True) # 분석내용
 
     pass
 class DoctorAccounts(models.Model):
-    doctortoken = models.BigIntegerField('doctortoken',null=True)
-    doctorid = models.AutoField('doctorid',primary_key=True)
-    doctorcount = models.IntegerField('doctorcount')
-    doctorname = models.TextField('doctorname',max_length=50)
-    hospitalname = models.TextField('hospitalname',max_length=50)
-    profileimgurl = models.TextField('profileimgurl',max_length=200)
-    speclist = models.TextField('speclist',max_length=500)
-    schoolname = models.TextField('schoolname',max_length=50)
-    pass
-class Treatment(models.Model): #진단내역
-    treatid = models.AutoField('treatid',primary_key=True)
-    userid = UserAccounts.userid
-    week = models.IntegerField('week') # week 번호
-    state = models.SmallIntegerField('state') # 0 : 답변대기 1 : 답변완료
-
-    reqdate = models.DateTimeField('reqdate') # 요청시간
-    reqcontent = models.TextField('reqcontent',max_length=500,null=True) # 요청 내용
-
-    recvdate = models.DateTimeField('recvdate',null=True) #답변시간
-    recvcontent = models.TextField('recvcontent',max_length=500,null=True) # 답변 내용
+    # doctortoken = models.BigIntegerField('doctortoken',null=True)
+    doctorid = models.IntegerField('doctorid')
+    doctorkakaoid = models.TextField('doctorkakaoid',max_length=100)
+    doctorcount = models.IntegerField('doctorcount',default=0)
+    doctorphone = models.TextField('doctorphone',max_length=20,null=True)
+    doctorname = models.TextField('doctorname',max_length=50, null=True)
+    doctoremail = models.TextField('doctoremail',max_length=50,null=True)
+    hospitalname = models.TextField('hospitalname',max_length=50, null=True)
+    profileimgurl = models.TextField('profileimgurl',max_length=200, null=True)
+    speclist = models.TextField('speclist',max_length=500 , null=True)
+    schoolname = models.TextField('schoolname',max_length=50, null=True)
+    registerdate = models.DateTimeField('registerdate',auto_now=True)
+    confirm = models.BooleanField('confirm',default=False)
     pass
 class Weeks(models.Model):
-    weekid = models.AutoField('weekid',primary_key=True)
+    id = models.AutoField('id',primary_key=True)
+    weekid = models.IntegerField('weekid',null=True)
     weekcontents = models.TextField('weekcontents',max_length=500) #???????
+    week_url = models.TextField('week_url',max_length=500) # week content's url
+    week_topic = models.TextField('week_topic',max_length=500,null=True)
+    key = models.TextField('key',max_length=100,null=True)
+    week_quest = models.TextField('week_quest',max_length=500,null=True)
+class Week1(models.Model):
+    id = models.AutoField('id',primary_key=True)
+    doctorid = models.IntegerField('doctorid')
+    childid = models.IntegerField('childid')
+    sender = models.BooleanField('sender',default=False) # 0 : 의사->아이 1 : 아이->의사
+    content = models.TextField('content',max_length=500,null=True)
+    title = models.TextField('title',max_length=500,null=True)
+    date = models.DateTimeField('date',auto_now=True, null=True)
+    request_type = models.BooleanField('request_type', null=False)
+class Week2(models.Model):
+    id = models.AutoField('id',primary_key=True)
+    doctorid = models.IntegerField('doctorid')
+    childid = models.IntegerField('childid')
+    sender = models.BooleanField('sender',default=False) # 0 : 의사->아이 1 : 아이->의사
+    content = models.TextField('content',max_length=500,null=True)
+    title = models.TextField('title',max_length=500,null=True)
+    date = models.DateTimeField('date',auto_now=True, null=True)
+    request_type = models.BooleanField('request_type', null=False)
+
+class Week3(models.Model):
+    id = models.AutoField('id',primary_key=True)
+    doctorid = models.IntegerField('doctorid')
+    childid = models.IntegerField('childid')
+    sender = models.BooleanField('sender',default=False) # 0 : 의사->아이 1 : 아이->의사
+    content = models.TextField('content',max_length=500,null=True)
+    title = models.TextField('title',max_length=500,null=True)
+    date = models.DateTimeField('date',auto_now=True, null=True)
+    request_type = models.BooleanField('request_type', null=False)
+
+class Week4(models.Model):
+    id = models.AutoField('id',primary_key=True)
+    doctorid = models.IntegerField('doctorid')
+    childid = models.IntegerField('childid')
+    sender = models.BooleanField('sender',default=False) # 0 : 의사->아이 1 : 아이->의사
+    content = models.TextField('content',max_length=500,null=True)
+    title = models.TextField('title',max_length=500,null=True)
+    date = models.DateTimeField('date',auto_now=True, null=True)
+    request_type = models.BooleanField('request_type', null=False)
+
+
+

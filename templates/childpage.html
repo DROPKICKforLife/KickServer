@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Dr.Mom - 우리아이 그림검사 프로젝트 </title>
+  <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+  <link rel="apple-touch-icon" href="/recv/static/assets/images/logo.png">
+  <meta name="apple-mobile-web-app-title" content="Flatkit">
+  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" sizes="196x196" href="/recv/static/assets/images/logo.png">
+  
+  <!-- style -->
+  <link rel="stylesheet" href="/recv/static/assets/animate.css/animate.min.css" type="text/css" />
+  <link rel="stylesheet" href="/recv/static/assets/glyphicons/glyphicons.css" type="text/css" />
+  <link rel="stylesheet" href="/recv/static/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="/recv/static/assets/material-design-icons/material-design-icons.css" type="text/css" />
+
+  <link rel="stylesheet" href="/recv/static/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+  <!-- build:css /recv/static/assets/styles/app.min.css -->
+  <link rel="stylesheet" href="/recv/static/assets/styles/app.css" type="text/css" />
+  <!-- endbuild -->
+  <link rel="stylesheet" href="/recv/static/assets/styles/font.css" type="text/css" />
+</head>
+<body>
+  <div class="app" id="app">
+
+<!-- ############ LAYOUT START-->
+
+  <!-- aside -->
+  <div id="aside" class="app-aside modal nav-dropdown">
+  	<!-- fluid app aside -->
+    <div class="left navside dark dk" data-layout="column">
+  	  <div class="navbar no-radius">
+        <!-- brand -->
+        <a class="navbar-brand" href="login">
+        	<div ui-include="'/recv/static/assets/images/logo.svg'"></div>
+        	<img src="/recv/static/assets/images/logo.png" alt="." class="hide">
+        	<span class="hidden-folded inline">Dr.Mom</span>
+        </a>
+        <!-- / brand -->
+      </div>
+      <div class="hide-scroll" data-flex>
+          <nav class="scroll nav-light">
+
+              <ul class="nav" ui-nav>
+                <li class="nav-header hidden-folded">
+                  <small class="text-muted">주 기능</small>
+                </li>
+
+                <li>
+                  <a  href="login" >
+                    <span class="nav-icon">
+                      <i class="material-icons">&#xe3fc;
+                        <span ui-include="'/recv/static/assets/images/i_0.svg'"></span>
+                      </i>
+                    </span>
+                    <span class="nav-text">메인페이지</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a>
+                    <span class="nav-caret">
+                      <i class="fa fa-caret-down"></i>
+                    </span>
+                    <span class="nav-label">
+                      <b class="label rounded label-sm primary">{{ useracc.count }}</b>
+                    </span>
+                    <span class="nav-icon">
+                      <i class="material-icons">&#xe5c3;
+                        <span ui-include="'/recv/static/assets/images/i_1.svg'"></span>
+                      </i>
+                    </span>
+                    <span class="nav-text">내담자 목록</span>
+                  </a>
+                  <ul class="nav-sub">
+                      {% for i in useracc %}
+                    <li>
+                      <a href="/recv/childpage?id={{ i.usertoken }}" >
+                        <span class="nav-text">{{ i.childname }}</span>
+                      </a>
+                    </li>
+                      {% endfor %}
+
+                  </ul>
+                </li>
+
+
+                <li class="nav-header hidden-folded">
+                  <small class="text-muted">마이 페이지</small>
+                </li>
+
+                <li>
+
+                  <a href="/recv/profile">
+                    <span class="nav-caret">
+                      <!-- <i class="fa fa-caret-down"></i> -->
+                    </span>
+                    <span class="nav-label">
+                      <!-- <b class="label label-sm accent">8</b> -->
+                    </span>
+                    <span class="nav-icon">
+                      <i class="material-icons">&#xe429;
+                        <span ui-include="'/recv/static/assets/images/i_4.svg'"></span>
+                      </i>
+                    </span>
+                    <span class="nav-text">계정 정보 관리</span>
+                  </a>
+                  <!-- <ul class="nav-sub nav-mega nav-mega-3">
+                    <li>
+                      <a href="arrow.html" >
+                        <span class="nav-text">Arrow</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="box.html" >
+                        <span class="nav-text">Box</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="button.html" >
+                        <span class="nav-text">Button</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="color.html" >
+                        <span class="nav-text">Color</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="dropdown.html" >
+                        <span class="nav-text">Dropdown</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="grid.html" >
+                        <span class="nav-text">Grid</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="icon.html" >
+                        <span class="nav-text">Icon</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="label.html" >
+                        <span class="nav-text">Label</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="list.html" >
+                        <span class="nav-text">List Group</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="modal.html" >
+                        <span class="nav-text">Modal</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="nav.html" >
+                        <span class="nav-text">Nav</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="progress.html" >
+                        <span class="nav-text">Progress</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="social.html" >
+                        <span class="nav-text">Social</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="sortable.html" >
+                        <span class="nav-text">Sortable</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="streamline.html" >
+                        <span class="nav-text">Streamline</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="timeline.html" >
+                        <span class="nav-text">Timeline</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="map.vector.html" >
+                        <span class="nav-text">Vector Map</span>
+                      </a>
+                    </li>
+                  </ul> -->
+                </li>
+
+                <li>
+                  <a href="/recv/wallet">
+                    <span class="nav-caret">
+                      <!-- <i class="fa fa-caret-down"></i> -->
+                    </span>
+                    <!-- <span class="nav-label"><b class="label no-bg">9</b></span> -->
+                    <span class="nav-icon">
+                      <i class="material-icons">&#xe3e8;
+                        <span ui-include="'/recv/static/assets/images/i_5.svg'"></span>
+                      </i>
+                    </span>
+                    <span class="nav-text">포인트 관리</span>
+                  </a>
+                  <!-- <ul class="nav-sub nav-mega">
+                    <li>
+                      <a href="profile.html" >
+                        <span class="nav-text">Profile</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="setting.html" >
+                        <span class="nav-text">Setting</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="search.html" >
+                        <span class="nav-text">Search</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="faq.html" >
+                        <span class="nav-text">FAQ</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="gallery.html" >
+                        <span class="nav-text">Gallery</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="invoice.html" >
+                        <span class="nav-text">Invoice</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="price.html" >
+                        <span class="nav-text">Price</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="blank.html" >
+                        <span class="nav-text">Blank</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="signin.html" >
+                        <span class="nav-text">Sign In</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="signup.html" >
+                        <span class="nav-text">Sign Up</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="forgot-password.html" >
+                        <span class="nav-text">Forgot Password</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="lockme.html" >
+                        <span class="nav-text">Lockme Screen</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="404.html" >
+                        <span class="nav-text">Error 404</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="505.html" >
+                        <span class="nav-text">Error 505</span>
+                      </a>
+                    </li>
+                  </ul> -->
+                </li>
+
+                <li>
+                  <a href="/recv/logout">
+                    <span class="nav-caret">
+                      <!-- <i class="fa fa-caret-down"></i> -->
+                    </span>
+                    <span class="nav-icon">
+                      <i class="material-icons">&#xe39e;
+                        <span ui-include="'/recv/static/assets/images/i_6.svg'"></span>
+                      </i>
+                    </span>
+                    <span class="nav-text">로그아웃</span>
+                  </a>
+                 <!--  <ul class="nav-sub">
+                    <li>
+                      <a href="form.layout.html" >
+                        <span class="nav-text">Form Layout</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="form.element.html" >
+                        <span class="nav-text">Form Element</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="form.validation.html" >
+                        <span class="nav-text">Form Validation</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="form.select.html" >
+                        <span class="nav-text">Select</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="form.editor.html" >
+                        <span class="nav-text">Editor</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="form.picker.html">
+                        <span class="nav-text">Picker</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="form.wizard.html">
+                        <span class="nav-text">Wizard</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="form.dropzone.html" class="no-ajax" >
+                        <span class="nav-text">File Upload</span>
+                      </a>
+                    </li>
+                  </ul> -->
+                </li>
+
+                    <!--
+                <li>
+                  <a>
+                    <span class="nav-caret">
+                      <i class="fa fa-caret-down"></i>
+                    </span>
+                    <span class="nav-icon">
+                      <i class="material-icons">&#xe896;
+                        <span ui-include="'/recv/static/assets/images/i_7.svg'"></span>
+                      </i>
+                    </span>
+                    <span class="nav-text">Tables</span>
+                  </a>
+                  <ul class="nav-sub">
+                    <li>
+                      <a href="static.html" >
+                        <span class="nav-text">Static table</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="datatable.html" >
+                        <span class="nav-text">Datatable</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="footable.html" >
+                        <span class="nav-text">Footable</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a>
+                    <span class="nav-caret">
+                      <i class="fa fa-caret-down"></i>
+                    </span>
+                    <span class="nav-label hidden-folded">
+                      <b class="label label-sm info">N</b>
+                    </span>
+                    <span class="nav-icon">
+                      <i class="material-icons">&#xe1b8;
+                        <span ui-include="'/recv/static/assets/images/i_8.svg'"></span>
+                      </i>
+                    </span> -->
+
+                    <!-- <span class="nav-text">Charts</span> -->
+                  <!-- </a> -->
+                  <!-- <ul class="nav-sub">
+                    <li>
+                      <a href="chart.html" >
+                        <span class="nav-text">Chart</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="nav-caret">
+                          <i class="fa fa-caret-down"></i>
+                        </span>
+                        <span class="nav-text">Echarts</span>
+                      </a>
+                      <ul class="nav-sub">
+                        <li>
+                          <a href="echarts-line.html" >
+                            <span class="nav-text">line</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="echarts-bar.html" >
+                            <span class="nav-text">Bar</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="echarts-pie.html" >
+                            <span class="nav-text">Pie</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="echarts-scatter.html" >
+                            <span class="nav-text">Scatter</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="echarts-radar-chord.html" >
+                            <span class="nav-text">Radar &amp; Chord</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="echarts-gauge-funnel.html" >
+                            <span class="nav-text">Gauges &amp; Funnel</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="echarts-map.html" >
+                            <span class="nav-text">Map</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul> -->
+                </li>
+
+                <li class="nav-header hidden-folded">
+                  <small class="text-muted">고객센터</small>
+                </li>
+
+                <li class="hidden-folded" >
+                  <a href="/recv/hint" >
+                    <span class="nav-text">도움말</span>
+                  </a>
+                </li>
+
+              </ul>
+          </nav>
+      </div>
+      <div class="b-t">
+        <div class="nav-fold">
+        	<a href="/">
+        	    <span class="pull-left">
+        	      <img src="{{ doctoracc.profileimgurl }}" alt="{{ doctoracc.doctorname }}" class="w-40 img-circle">
+        	    </span>
+        	    <span class="clear hidden-folded p-x">
+        	      <span class="block _500">{{ doctoracc.doctorname }}</span>
+        	      <small class="block text-muted"><i class="fa fa-circle text-success m-r-sm"></i>online</small>
+        	    </span>
+        	</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / -->
+  
+  <!-- content -->
+  <div id="content" class="app-content box-shadow-z0" role="main">
+    <div class="app-header white box-shadow">
+        <div class="navbar navbar-toggleable-sm flex-row align-items-center">
+            <!-- Open side - Naviation on mobile -->
+            <a data-toggle="modal" data-target="#aside" class="hidden-lg-up mr-3">
+              <i class="material-icons">&#xe5d2;</i>
+            </a>
+            <!-- / -->
+        
+            <!-- Page title - Bind to $state's title -->
+            <div class="mb-0 h5 no-wrap" ng-bind="$state.current.data.title" id="pageTitle"></div>
+        
+            <!-- navbar collapse -->
+            <div class="collapse navbar-collapse" id="collapse">
+              <!-- link and dropdown -->
+{#              <ul class="nav navbar-nav mr-auto">#}
+{#                <li class="nav-item dropdown">#}
+{#                  <a class="nav-link" href data-toggle="dropdown">#}
+{#                    <i class="fa fa-fw fa-plus text-muted"></i>#}
+{#                    <span>New</span>#}
+{#                  </a>#}
+{#                  <div ui-include="'/recv/static/views/blocks/dropdown.new.html'"></div>#}
+{#                </li>#}
+{#              </ul>#}
+        
+              <div ui-include="'/recv/static/views/blocks/navbar.form.html'"></div>
+              <!-- / -->
+            </div>
+            <!-- / navbar collapse -->
+        
+            <!-- navbar right -->
+            <ul class="nav navbar-nav ml-auto flex-row">
+              <li class="nav-item dropdown pos-stc-xs">
+                <a class="nav-link mr-2" href data-toggle="dropdown">
+                  <i class="material-icons">&#xe7f5;</i>
+                  <span class="label label-sm up warn">3</span>
+                </a>
+                <div ui-include="'/recv/static/views/blocks/dropdown.notification.html'"></div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link p-0 clear" href="#" data-toggle="dropdown">
+                  <span class="avatar w-32">
+                    <img src="{{ doctoracc.profileimgurl }}" alt="{{ doctoracc.doctorname }}">
+                    <i class="on b-white bottom"></i>
+                  </span>
+                </a>
+                <div ui-include="'/recv/static/views/blocks/dropdown.user.html'"></div>
+              </li>
+              <li class="nav-item hidden-md-up">
+                <a class="nav-link pl-2" data-toggle="collapse" data-target="#collapse">
+                  <i class="material-icons">&#xe5d4;</i>
+                </a>
+              </li>
+            </ul>
+            <!-- / navbar right -->
+        </div>
+    </div>
+    <div class="app-footer">
+      <div class="p-2 text-xs">
+        <div class="pull-right text-muted py-1">
+          &copy; Copyright <strong>SW Maestro 8th </strong> <span class="hidden-xs-down">- TEAM1004</span>
+          <a ui-scroll-to="content"><i class="fa fa-long-arrow-up p-x-sm"></i></a>
+        </div>
+        <div class="nav">
+           </div>
+      </div>
+    </div>
+    <div ui-view class="app-body" id="view">
+
+<!-- ############ PAGE START-->
+
+  <div class="item">
+    <div class="item-bg">
+                {% if childacc.childsex == 0 %}
+      <img src="/recv/static/assets/profile/boy.png" alt="{{ childacc.childname }}" class="blur opacity-3">
+
+                {% endif %}
+                {% if childacc.childsex == 1 %}
+    <img src="/recv/static/assets/profile/girl.png" alt="{{ childacc.childname }}" class="blur opacity-3">
+
+                {% endif %}
+    </div>
+    <div class="p-a-md">
+      <div class="row m-t">
+        <div class="col-sm-7">
+          <a href class="pull-left m-r-md">
+            <span class="avatar w-96">
+            {% if childacc.childsex == 0 %}
+      <img src="/recv/static/assets/profile/boy.png" alt="{{ childacc.childname }}">
+
+                {% endif %}
+                {% if childacc.childsex == 1 %}
+    <img src="/recv/static/assets/profile/girl.png" alt="{{ childacc.childname }}" >
+
+                {% endif %}
+              <i class="on b-white"></i>
+            </span>
+          </a>
+          <div class="clear m-b">
+            <h3 class="m-0 m-b-xs">{{ childacc.childname }}</h3>
+              {% if childacc.childability == 0 %}
+            <p class="text-muted"><span class="m-r">{{ childacc.childage }} 세</span> <small><i class="fa fa-map-marker m-r-xs"></i>그림실력 : 하급</small></p>
+            {% endif %}
+              {% if childacc.childability == 1 %}
+            <p class="text-muted"><span class="m-r">{{ childacc.childage }} 세</span> <small><i class="fa fa-map-marker m-r-xs"></i>그림실력 : 중급</small></p>
+            {% endif %}
+            {% if childacc.childability == 2 %}
+            <p class="text-muted"><span class="m-r">{{ childacc.childage }} 세</span> <small><i class="fa fa-map-marker m-r-xs"></i>그림실력 : 상급</small></p>
+            {% endif %}
+              <div class="block clearfix m-b">
+
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <p class="text-md profile-status"></p>
+    </div>
+  </div>
+  <div class="dker p-x">
+    <div class="row">
+      <div class="col-sm-6 push-sm-6">
+        <div class="p-y text-center text-sm-right">
+          <a href class="inline p-x text-center">
+            <span class="h4 block m-0">{{ childacc.week }}</span>
+            <small class="text-xs text-muted">주차 진행중</small>
+          </a>
+          <a href class="inline p-x b-l b-r text-center">
+            <span class="h4 block m-0">{{ reqcount }}</span>
+            <small class="text-xs text-muted">상담요청</small>
+          </a>
+          <a href class="inline p-x text-center">
+            <span class="h4 block m-0">{{ commentcount }}</span>
+            <small class="text-xs text-muted">답변완료</small>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-6 pull-sm-6">
+        <div class="p-y-md clearfix nav-active-primary">
+          <ul class="nav nav-pills nav-sm">
+            <li class="nav-item active">
+              <a class="nav-link" href data-toggle="tab" data-target="#tab_1">1주차</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href data-toggle="tab" data-target="#tab_2">2주차</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href data-toggle="tab" data-target="#tab_3">3주차</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href data-toggle="tab" data-target="#tab_4">4주차</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="padding">
+    <div class="row">
+      <div class="col-sm-8 col-lg-9">
+        <div class="tab-content">      
+          <div class="tab-pane p-v-sm active" id="tab_1">
+            <div class="streamline b-l m-b m-l">
+
+            <div class="sl-item">
+                <div class="sl-left">
+                            {% if childacc.childsex == 0 %}
+      <img src="/recv/static/assets/profile/boy.png" alt="{{ childacc.childname }}" >
+
+                {% endif %}
+                {% if childacc.childsex == 1 %}
+    <img src="/recv/static/assets/profile/girl.png" alt="{{ childacc.childname }}">
+
+                {% endif %}
+                </div>
+                <div class="sl-content">
+                  <div class="sl-date text-muted">{{ uploadtime }}</div>
+                  <div class="sl-author">
+                    <a href>{{ childacc.childname }}</a>
+                  </div>
+                  <div>
+                    <p>과거 상담 정보 : {{ childacc.prevcontent }}</p>
+                    <p>내담자 요청 내용 : {{ childacc.hopecontent }}</p>
+                      <div>
+                          <h3>House Drawing</h3>
+                          <img src="{{ houseurl}}" alt='not uploaded yet'>
+                          <h4>감지 내용</h4>
+                          {% if houseurl == None %}
+                          <p>특이사항을 감지하지 못하였습니다.</p>
+                          {% endif %}
+                      {% if houseurl != None %}
+                      <p style="font-size: 15pt">{{ housecontent|safe }}</p>
+
+                      {% endif %}
+
+                      </div>
+                      <div>
+                          <h3>Tree Drawing</h3>
+                          <img src="{{ treeurl }}" alt='not uploaded yet'>
+                          <h4>감지 내용</h4>
+                          <p style="font-size: 15pt">{{ treecontent|safe }}</p>
+                      </div>
+                      <div>
+                          <h3>Person Drawing</h3>
+                          <img src="{{ personurl }}" alt='not uploaded yet'>
+                          <h4>감지 내용</h4>
+                          {% if personurl == None %}
+                          <p>특이사항을 감지하지 못하였습니다.</p>
+                          {% endif %}
+                      {% if personurl != None %}
+                          <p style="font-size: 15pt">{{ personcontent|safe }}</p>
+                      {% endif %}
+                      </div>
+                  </div>
+                  <div class="sl-footer">
+{#                    <a href ui-toggle-class class="btn white btn-xs">#}
+{#                      <i class="fa fa-fw fa-star-o text-muted inline"></i>#}
+{#                      <i class="fa fa-fw fa-star text-danger none"></i>#}
+{#                    </a>#}
+{#                    <a href class="btn white btn-xs" data-toggle="collapse" data-target="#reply-2">#}
+{#                      <i class="fa fa-fw fa-mail-reply text-muted"></i>#}
+{#                    </a>#}
+                  </div>
+
+                </div>
+              </div>
+
+
+                {% if week1 != None %}
+                    {% for i in week1 %}
+                        <div class="sl-item">
+                        <div class="sl-left">
+                            {% if i.sender == False %}
+                            <img src="{{ doctoracc.profileimgurl }}" class="img-circle">
+                            {% endif %}
+                            {% if i.sender == True %}
+                                {% if childacc.childsex == 0 %}
+  <img src="/recv/static/assets/profile/boy.png" alt="{{ childacc.childname }}" >
+
+            {% endif %}
+            {% if childacc.childsex == 1 %}
+<img src="/recv/static/assets/profile/girl.png" alt="{{ childacc.childname }}" >
+
+            {% endif %}
+                            {% endif %}
+
+                        </div>
+                <div class="sl-content">
+                  <div class="sl-date text-muted">{{ i.date }}</div>
+                  <div class="sl-author">
+                            {% if i.sender == False %}
+                    <a href>{{ doctoracc.doctorname }}</a>
+                            {% endif %}
+                            {% if i.sender == True %}
+                    <a href>{{ childacc.childname }}</a>
+                            {% endif %}
+                  </div>
+                  <div>
+                      {% if i.request_type == False %}
+                          {% if i.title == None %}
+
+                              {% endif %}
+                          {% if i.title != None %}
+                      <h3>질문 : {{ i.title }}</h3>
+
+                              {% endif %}
+
+                      {% endif %}
+                      {% if i.request_type == True %}
+                      <h3>[답변]</h3>
+                      {% endif %}
+                    <p style="font-size: 15pt">{{ i.content|safe }}</p>
+                  </div>
+                  <div class="sl-footer">
+                  </div>
+{#                  <div class="box collapse m-0" id="reply-1">#}
+{#                    <form>#}
+{#                      <textarea class="form-control no-border" rows="3" placeholder="Type something..."></textarea>#}
+{#                    </form>#}
+{#                    <div class="box-footer clearfix">#}
+{#                      <button class="btn btn-info pull-right btn-sm">Post</button>#}
+{#                      <ul class="nav nav-pills nav-sm">#}
+{#                        <li class="nav-item"><a class="nav-link" href><i class="fa fa-camera text-muted"></i></a></li>#}
+{#                        <li class="nav-item"><a class="nav-link" href><i class="fa fa-video-camera text-muted"></i></a></li>#}
+{#                      </ul>#}
+{#                    </div>#}
+{#                  </div>#}
+                </div>
+              </div>
+                    {% endfor %}
+
+
+
+                {% endif %}
+                <div class="box collapse in m-0" id="reply-1">
+                    <form method="post" action="/recv/sendmessage">
+                      <pre><textarea class="form-control no-border" rows="3" placeholder="답변 하실 내용을 입력해 주세요..." name="content"></textarea></pre>
+{#                        <input type="radio" name="request_type" value="reply_request"  checked >요청<br/>#}
+{#                        <input type="radio" name="request_type" value="reply_reply" >답변<br/>#}
+                        <input type="hidden" value="1" name="week_id">
+                        <input type="hidden" value="{{ doctoracc.doctorid }}" name="doctorid">
+                        <input type="hidden" value="{{ childacc.usertoken }}" name="childid">
+                        <input type="hidden" value="reply_reply" name="request_type">
+                    <div class="box-footer clearfix">
+                      <button class="btn btn-info pull-right btn-sm" onclick="submit()">전송</button>
+                      <ul class="nav nav-pills nav-sm">
+                      </ul>
+                    </div>
+                        </form>
+                  </div>
+
+            </div>
+          </div>
+
+          <div class="tab-pane p-v-sm" id="tab_2">
+              <div ui-include="'/recv/static/views/blocks/widget.friends.html'"></div>
+              <div class="streamline b-l m-b m-l">
+
+            <div class="sl-item">
+                <div class="sl-left">
+                            {% if childacc.childsex == 0 %}
+  <img src="/recv/static/assets/profile/boy.png" alt="{{ childacc.childname }}" >
+
+            {% endif %}
+            {% if childacc.childsex == 1 %}
+<img src="/recv/static/assets/profile/girl.png" alt="{{ childacc.childname }}" >
+
+            {% endif %}
+                </div>
+                <div class="sl-content">
+                  {% for i in week2 %}
+                  <div class="sl-date text-muted">{{ week2_communication.date }}</div>
+                  <div class="sl-author">
+                    <a href>{{ childacc.childname }}</a>
+                  </div>
+                  <div>
+                      <h2>2주차 : {{ i.weekcontents }}</h2>
+                      <img src="{{ i.week_url }}" alt="no_img">
+                      {% if week2_count < 1 %}
+                      <p>
+                          아직 진행하지 않았습니다.
+                      </p>
+                    {% endif %}
+                  {% if week2_count == 0 %}
+                      <p>
+                            {{ week2_communication.content }}
+                      </p>
+                  {% endif %}
+                  </div>
+                  {% endfor %}
+                  <div class="sl-footer">
+
+                  </div>
+
+                </div>
+              </div>
+
+
+                {% if week1 != None %}
+                    {% for i in week2 %}
+                        <div class="sl-item">
+                        <div class="sl-left">
+                            {% if i.sender == False %}
+                            <img src="{{ doctoracc.profileimgurl }}" class="img-circle">
+                            {% endif %}
+                            {% if i.sender == True %}
+                            {% if childacc.childsex == 0 %}
+  <img src="/recv/static/assets/profile/boy.png" alt="{{ childacc.childname }}">
+
+            {% endif %}
+            {% if childacc.childsex == 1 %}
+<img src="/recv/static/assets/profile/girl.png" alt="{{ childacc.childname }}">
+
+            {% endif %}
+
+                            {% endif %}
+
+                        </div>
+                <div class="sl-content">
+                  <div class="sl-date text-muted">{{ i.date }}</div>
+                  <div class="sl-author">
+                            {% if i.sender == False %}
+                    <a href>{{ doctoracc.doctorname }}</a>
+                            {% endif %}
+                            {% if i.sender == True %}
+                    <a href>{{ childacc.childname }}</a>
+                            {% endif %}
+                  </div>
+                  <div>
+                    <p style="font-size: 15pt">{{ i.content|safe }}</p>
+                  </div>
+                </div>
+              </div>
+                    {% endfor %}
+
+
+
+                {% endif %}
+                <div class="box collapse in m-0" id="reply-2">
+                    <form method="post" action="/recv/sendmessage">
+                      <textarea class="form-control no-border" rows="3" placeholder="답변 하실 내용을 입력해 주세요..." name="content"></textarea>
+{#                        <input type="radio" name="request_type" value="reply_request"  checked >요청<br/>#}
+{#                        <input type="radio" name="request_type" value="reply_reply" >답변<br/>#}
+                        <input type="hidden" value="2" name="week_id">
+                        <input type="hidden" value="{{ doctoracc.doctorid }}" name="doctorid">
+                        <input type="hidden" value="{{ childacc.usertoken }}" name="childid">
+                        <input type="hidden" value="reply_reply" name="request_type">
+                    <div class="box-footer clearfix">
+                      <button class="btn btn-info pull-right btn-sm" onclick="submit()">전송</button>
+                      <ul class="nav nav-pills nav-sm">
+                      </ul>
+                    </div>
+                        </form>
+                  </div>
+
+            </div>
+
+
+
+
+          </div>
+
+
+          <div class="tab-pane p-v-sm" id="tab_3">
+              <div ui-include="'/recv/static/views/blocks/widget.friends.html'"></div>
+              <div class="streamline b-l m-b m-l">
+
+            <div class="sl-item">
+                <div class="sl-left">
+                            {% if childacc.childsex == 0 %}
+  <img src="/recv/static/assets/profile/boy.png" alt="{{ childacc.childname }}" >
+
+            {% endif %}
+            {% if childacc.childsex == 1 %}
+<img src="/recv/static/assets/profile/girl.png" alt="{{ childacc.childname }}" >
+
+            {% endif %}
+                </div>
+                <div class="sl-content">
+                  {% for i in week3 %}
+                  <div class="sl-date text-muted">{{ week3_communication.date }}</div>
+                  <div class="sl-author">
+                    <a href>{{ childacc.childname }}</a>
+                  </div>
+                  <div>
+                      <h2>3주차 : {{ i.weekcontents }}</h2>
+                      <img src="{{ i.week_url }}" alt="no_img">
+                      {% if week3_count < 1 %}
+                      <p>
+                          아직 진행하지 않았습니다.
+                      </p>
+                    {% endif %}
+                  {% if week3_count == 0 %}
+                      <p>
+                            {{ week3_communication.content }}
+                      </p>
+                  {% endif %}
+                  </div>
+                  {% endfor %}
+                  <div class="sl-footer">
+
+                  </div>
+
+                </div>
+              </div>
+
+
+                {% if week3 != None %}
+                    {% for i in week3 %}
+                        <div class="sl-item">
+                        <div class="sl-left">
+                            {% if i.sender == False %}
+                            <img src="{{ doctoracc.profileimgurl }}" class="img-circle">
+                            {% endif %}
+                            {% if i.sender == True %}
+                            {% if childacc.childsex == 0 %}
+  <img src="/recv/static/assets/profile/boy.png" alt="{{ childacc.childname }}">
+
+            {% endif %}
+            {% if childacc.childsex == 1 %}
+<img src="/recv/static/assets/profile/girl.png" alt="{{ childacc.childname }}">
+
+            {% endif %}
+                             {% endif %}
+
+                        </div>
+                <div class="sl-content">
+                  <div class="sl-date text-muted">{{ i.date }}</div>
+                  <div class="sl-author">
+                            {% if i.sender == False %}
+                    <a href>{{ doctoracc.doctorname }}</a>
+                            {% endif %}
+                            {% if i.sender == True %}
+                    <a href>{{ childacc.childname }}</a>
+                            {% endif %}
+                  </div>
+                  <div>
+                    <p style="font-size: 15pt">{{ i.content|safe }}</p>
+                  </div>
+                </div>
+              </div>
+                    {% endfor %}
+
+
+
+                {% endif %}
+                <div class="box collapse in m-0" id="reply-3">
+                    <form method="post" action="/recv/sendmessage">
+                      <textarea class="form-control no-border" rows="3" placeholder="답변 하실 내용을 입력해 주세요..." name="content"></textarea>
+{#                        <input type="radio" name="request_type" value="reply_request"  checked >요청<br/>#}
+{#                        <input type="radio" name="request_type" value="reply_reply" >답변<br/>#}
+                        <input type="hidden" value="3" name="week_id">
+                        <input type="hidden" value="{{ doctoracc.doctorid }}" name="doctorid">
+                        <input type="hidden" value="{{ childacc.usertoken }}" name="childid">
+                        <input type="hidden" value="reply_reply" name="request_type">
+                    <div class="box-footer clearfix">
+                      <button class="btn btn-info pull-right btn-sm" onclick="submit()">전송</button>
+                      <ul class="nav nav-pills nav-sm">
+                      </ul>
+                    </div>
+                        </form>
+                  </div>
+
+            </div>
+          </div>
+          <div class="tab-pane p-v-sm" id="tab_4">
+            <div ui-include="'/recv/static/views/blocks/widget.friends.html'"></div>
+              <div class="streamline b-l m-b m-l">
+
+            <div class="sl-item">
+                <div class="sl-left">
+                            {% if childacc.childsex == 0 %}
+  <img src="/recv/static/assets/profile/boy.png" alt="{{ childacc.childname }}" >
+
+            {% endif %}
+            {% if childacc.childsex == 1 %}
+<img src="/recv/static/assets/profile/girl.png" alt="{{ childacc.childname }}" >
+
+            {% endif %}
+                </div>
+                <div class="sl-content">
+                  {% for i in week4 %}
+                  <div class="sl-date text-muted">{{ week4_communication.date }}</div>
+                  <div class="sl-author">
+                    <a href>{{ childacc.childname }}</a>
+                  </div>
+                  <div>
+                      <h2>4주차 : {{ i.weekcontents }}</h2>
+                      <img src="{{ i.week_url }}" alt="no_img">
+                      {% if week4_count < 1 %}
+                      <p>
+                          아직 진행하지 않았습니다.
+                      </p>
+                    {% endif %}
+                  {% if week4_count == 0 %}
+                      <p>
+                            {{ week4_communication.content }}
+                      </p>
+                  {% endif %}
+                  </div>
+                  {% endfor %}
+                  <div class="sl-footer">
+
+                  </div>
+
+                </div>
+              </div>
+
+
+                {% if week4 != None %}
+                    {% for i in week4 %}
+                        <div class="sl-item">
+                        <div class="sl-left">
+                            {% if i.sender == False %}
+                            <img src="{{ doctoracc.profileimgurl }}" class="img-circle">
+                            {% endif %}
+                            {% if i.sender == True %}
+
+                                {% if childacc.childsex == 0 %}
+  <img src="/recv/static/assets/profile/boy.png" alt="{{ childacc.childname }}" >
+
+            {% endif %}
+            {% if childacc.childsex == 1 %}
+<img src="/recv/static/assets/profile/girl.png" alt="{{ childacc.childname }}" >
+
+            {% endif %}
+                                 {% endif %}
+
+                        </div>
+                <div class="sl-content">
+                  <div class="sl-date text-muted">{{ i.date }}</div>
+                  <div class="sl-author">
+                            {% if i.sender == False %}
+                    <a href>{{ doctoracc.doctorname }}</a>
+                            {% endif %}
+                            {% if i.sender == True %}
+                    <a href>{{ childacc.childname }}</a>
+                            {% endif %}
+                  </div>
+                  <div>
+                    <p style="font-size: 15pt">{{ i.content|safe }}</p>
+                  </div>
+                </div>
+              </div>
+                    {% endfor %}
+
+
+
+                {% endif %}
+                <div class="box collapse in m-0" id="reply-4">
+                    <form method="post" action="/recv/sendmessage">
+                      <textarea class="form-control no-border" rows="3" placeholder="답변 하실 내용을 입력해 주세요..." name="content"></textarea>
+{#                        <input type="radio" name="request_type" value="reply_request" checked >요청<br/>#}
+{#                        <input type="radio" name="request_type" value="reply_reply" >답변<br/>#}
+                        <input type="hidden" value="4" name="week_id">
+                        <input type="hidden" value="{{ doctoracc.doctorid }}" name="doctorid">
+                        <input type="hidden" value="{{ childacc.usertoken }}" name="childid">
+                        <input type="hidden" value="reply_reply" name="request_type">
+                    <div class="box-footer clearfix">
+                      <button class="btn btn-info pull-right btn-sm" onclick="submit()">전송</button>
+                      <ul class="nav nav-pills nav-sm">
+                      </ul>
+                    </div>
+                        </form>
+                  </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+<!-- ############ PAGE END-->
+    </div>
+  </div>
+<!-- ############ LAYOUT END-->
+
+  </div>
+<!-- build:js /recv/static/scripts/app.html.js -->
+<!-- jQuery -->
+  <script src="/recv/static/libs/jquery/jquery/dist/jquery.js"></script>
+<!-- Bootstrap -->
+  <script src="/recv/static/libs/jquery/tether/dist/js/tether.min.js"></script>
+  <script src="/recv/static/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+<!-- core -->
+  <script src="/recv/static/libs/jquery/underscore/underscore-min.js"></script>
+  <script src="/recv/static/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+  <script src="/recv/static/libs/jquery/PACE/pace.min.js"></script>
+
+  <script src="/recv/static/scripts/config.lazyload.js"></script>
+
+  <script src="/recv/static/scripts/palette.js"></script>
+  <script src="/recv/static/scripts/ui-load.js"></script>
+  <script src="/recv/static/scripts/ui-jp.js"></script>
+  <script src="/recv/static/scripts/ui-include.js"></script>
+  <script src="/recv/static/scripts/ui-device.js"></script>
+  <script src="/recv/static/scripts/ui-form.js"></script>
+  <script src="/recv/static/scripts/ui-nav.js"></script>
+  <script src="/recv/static/scripts/ui-screenfull.js"></script>
+  <script src="/recv/static/scripts/ui-scroll-to.js"></script>
+  <script src="/recv/static/scripts/ui-toggle-class.js"></script>
+
+  <script src="/recv/static/scripts/app.js"></script>
+
+  <!-- ajax -->
+  <script src="/recv/static/libs/jquery/jquery-pjax/jquery.pjax.js"></script>
+  <script src="/recv/static/scripts/ajax.js"></script>
+<!-- endbuild -->
+</body>
+</html>
